@@ -1,5 +1,6 @@
 import { Controller, OnModuleInit, Inject, Post, Body } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
+import { ApiBody, ApiOperation } from '@nestjs/swagger';
 import {
   SignupDto,
   SignupResponse,
@@ -22,6 +23,7 @@ export class CustomersGateway implements OnModuleInit {
   }
 
   @Post('/signup')
+  @ApiOperation({ description: 'Signups a user via email-password.' })
   async signup(@Body() dto: SignupDto) {
     return firstValueFrom(this.customerService.signup(dto));
   }
