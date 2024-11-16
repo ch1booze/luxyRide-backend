@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package admin;
+
+service AdminService {
+  rpc Signin (SigninDto) returns (SigninResponse);
+}
+
+message SigninDto {
+  string email = 1;
+  string password = 2;
+}
+
+message SigninResponse {
+  string token = 1;
+}

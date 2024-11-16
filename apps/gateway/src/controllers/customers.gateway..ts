@@ -1,6 +1,6 @@
 import { Controller, OnModuleInit, Inject, Post, Body } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { ApiBody, ApiOperation } from '@nestjs/swagger';
+import { ApiOperation } from '@nestjs/swagger';
 import {
   SignupDto,
   SignupResponse,
