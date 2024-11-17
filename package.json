@@ -1,5 +1,5 @@
 {
-  "name": "luxyRide-be",
+  "name": "luxyRide-backend",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -11,13 +11,13 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/apps/luxyRide-be/main",
+    "start:prod": "node dist/apps/luxyRide-backend/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./apps/luxyRide-be/test/jest-e2e.json"
+    "test:e2e": "jest --config ./apps/luxyRide-backend/test/jest-e2e.json"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.12.2",
@@ -29,6 +29,7 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^8.0.5",
     "@prisma/client": "^5.22.0",
+    "argon2": "^0.41.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1"
   },

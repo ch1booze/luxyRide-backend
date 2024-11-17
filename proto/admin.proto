@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package admin;
 
-service AdminService {
+service AdminApp {
   rpc Signin (SigninDto) returns (SigninResponse);
 }
 

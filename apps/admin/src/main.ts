@@ -7,7 +7,7 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const appContext = await NestFactory.createApplicationContext(AdminModule);
   const configService = appContext.get(ConfigService);
-  const PORT = configService.get<number>('PORT_ADMIN');
+  const PORT = configService.get<number>('PORT');
 
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AdminModule,

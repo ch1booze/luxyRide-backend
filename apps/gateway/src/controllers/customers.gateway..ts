@@ -22,7 +22,7 @@ export class CustomersGateway implements OnModuleInit {
       this.customerClient.getService<CustomerService>('CustomerService');
   }
 
-  @Post('/signup')
+  @Post('/customers/signup')
   @ApiOperation({ description: 'Signups a user via email-password.' })
   async signup(@Body() dto: SignupDto) {
     return firstValueFrom(this.customerService.signup(dto));
