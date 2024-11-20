@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from 'apps/admin/prisma/client';
 import * as argon2 from 'argon2';
 
 @Injectable()
@@ -68,11 +68,15 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     );
 
     // Assign all permissions to super user
-    await this.rolePermissions.createMany({
-      data: createdPermissions.map((p) => {
-        return { roleId: superUserRole.id, permissionId: p.id };
+    await this.$transaction(
+      createdPermissions.map((p) => {
+        return this.rolePermissions.upsert({
+          where: { id: { roleId: superUserRole.id, permissionId: p.id } },
+          update: {},
+          create: { roleId: superUserRole.id, permissionId: p.id },
+        });
       }),
-    });
+    );
 
     return superUserRole;
   }

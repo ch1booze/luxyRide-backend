@@ -15,7 +15,7 @@ export interface SigninDto {
 }
 
 export interface SigninResponse {
-  token: string;
+  accessToken: string;
 }
 
 function createBaseSigninDto(): SigninDto {
@@ -103,7 +103,7 @@ export const SigninDto: MessageFns<SigninDto> = {
 };
 
 function createBaseSigninResponse(): SigninResponse {
-  return { token: '' };
+  return { accessToken: '' };
 }
 
 export const SigninResponse: MessageFns<SigninResponse> = {
@@ -111,8 +111,8 @@ export const SigninResponse: MessageFns<SigninResponse> = {
     message: SigninResponse,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.token !== '') {
-      writer.uint32(10).string(message.token);
+    if (message.accessToken !== '') {
+      writer.uint32(10).string(message.accessToken);
     }
     return writer;
   },
@@ -130,7 +130,7 @@ export const SigninResponse: MessageFns<SigninResponse> = {
             break;
           }
 
-          message.token = reader.string();
+          message.accessToken = reader.string();
           continue;
         }
       }
@@ -144,14 +144,16 @@ export const SigninResponse: MessageFns<SigninResponse> = {
 
   fromJSON(object: any): SigninResponse {
     return {
-      token: isSet(object.token) ? globalThis.String(object.token) : '',
+      accessToken: isSet(object.accessToken)
+        ? globalThis.String(object.accessToken)
+        : '',
     };
   },
 
   toJSON(message: SigninResponse): unknown {
     const obj: any = {};
-    if (message.token !== '') {
-      obj.token = message.token;
+    if (message.accessToken !== '') {
+      obj.accessToken = message.accessToken;
     }
     return obj;
   },
@@ -165,21 +167,21 @@ export const SigninResponse: MessageFns<SigninResponse> = {
     object: I,
   ): SigninResponse {
     const message = createBaseSigninResponse();
-    message.token = object.token ?? '';
+    message.accessToken = object.accessToken ?? '';
     return message;
   },
 };
 
-export interface AdminAppService {
+export interface Admin {
   Signin(request: SigninDto): Promise<SigninResponse>;
 }
 
-export const AdminAppServiceServiceName = 'admin.AdminAppService';
-export class AdminAppServiceClientImpl implements AdminAppService {
+export const AdminServiceName = 'admin.Admin';
+export class AdminClientImpl implements Admin {
   private readonly rpc: Rpc;
   private readonly service: string;
   constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || AdminAppServiceServiceName;
+    this.service = opts?.service || AdminServiceName;
     this.rpc = rpc;
     this.Signin = this.Signin.bind(this);
   }

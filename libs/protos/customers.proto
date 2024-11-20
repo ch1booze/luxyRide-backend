@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package customers;
 
-service CustomersAppService {
+service Customers {
   rpc Signup (SignupDto) returns (SignupResponse);
 }
 
@@ -14,7 +14,5 @@ message SignupDto {
 }
 
 message SignupResponse {
-  bool success = 1;
-  string customer_id = 2;
-  string token = 3;
+  string access_token = 1;
 }

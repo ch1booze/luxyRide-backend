@@ -6,8 +6,8 @@ import { SigninDto, SigninResponse } from 'libs/generated/admin';
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-  @GrpcMethod('AdminApp', 'Signin')
+  @GrpcMethod('Admin', 'Signin')
   async signin(data: SigninDto): Promise<SigninResponse> {
-    return this.usersService.signin(data);
+    return await this.usersService.signin(data);
   }
 }

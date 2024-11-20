@@ -6,7 +6,10 @@ import { SigninDto, SigninResponse } from 'libs/generated/admin';
 export class UsersService {
   constructor(private prismaService: PrismaService) {}
 
-  signin(dto: SigninDto): SigninResponse {
-    return { token: JSON.stringify(dto) };
+  async signin(dto: SigninDto): Promise<SigninResponse> {
+    await this.prismaService.user.findUnique({
+      where: { email: dto.email, passwordHash: dto.password },
+    });
+    return { accessToken: '1234567890' };
   }
 }

@@ -15,7 +15,7 @@ async function bootstrap() {
       transport: Transport.GRPC,
       options: {
         package: 'admin',
-        protoPath: join(__dirname, '../../../proto/admin.proto'),
+        protoPath: join(__dirname, '../../../libs/protos/admin.proto'),
         url: `localhost:${PORT}`,
       },
     },

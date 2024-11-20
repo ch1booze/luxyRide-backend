@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package admin;
 
-service AdminAppService {
+service Admin {
   rpc Signin (SigninDto) returns (SigninResponse);
 }
 
@@ -12,5 +12,5 @@ message SigninDto {
 }
 
 message SigninResponse {
-  string token = 1;
+  string access_token = 1;
 }

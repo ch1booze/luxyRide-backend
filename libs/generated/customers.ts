@@ -17,9 +17,7 @@ export interface SignupDto {
 }
 
 export interface SignupResponse {
-  success: boolean;
-  customerId: string;
-  token: string;
+  accessToken: string;
 }
 
 function createBaseSignupDto(): SignupDto {
@@ -143,7 +141,7 @@ export const SignupDto: MessageFns<SignupDto> = {
 };
 
 function createBaseSignupResponse(): SignupResponse {
-  return { success: false, customerId: '', token: '' };
+  return { accessToken: '' };
 }
 
 export const SignupResponse: MessageFns<SignupResponse> = {
@@ -151,14 +149,8 @@ export const SignupResponse: MessageFns<SignupResponse> = {
     message: SignupResponse,
     writer: BinaryWriter = new BinaryWriter(),
   ): BinaryWriter {
-    if (message.success !== false) {
-      writer.uint32(8).bool(message.success);
-    }
-    if (message.customerId !== '') {
-      writer.uint32(18).string(message.customerId);
-    }
-    if (message.token !== '') {
-      writer.uint32(26).string(message.token);
+    if (message.accessToken !== '') {
+      writer.uint32(10).string(message.accessToken);
     }
     return writer;
   },
@@ -172,27 +164,11 @@ export const SignupResponse: MessageFns<SignupResponse> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 8) {
+          if (tag !== 10) {
             break;
           }
 
-          message.success = reader.bool();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.customerId = reader.string();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.token = reader.string();
+          message.accessToken = reader.string();
           continue;
         }
       }
@@ -206,26 +182,16 @@ export const SignupResponse: MessageFns<SignupResponse> = {
 
   fromJSON(object: any): SignupResponse {
     return {
-      success: isSet(object.success)
-        ? globalThis.Boolean(object.success)
-        : false,
-      customerId: isSet(object.customerId)
-        ? globalThis.String(object.customerId)
+      accessToken: isSet(object.accessToken)
+        ? globalThis.String(object.accessToken)
         : '',
-      token: isSet(object.token) ? globalThis.String(object.token) : '',
     };
   },
 
   toJSON(message: SignupResponse): unknown {
     const obj: any = {};
-    if (message.success !== false) {
-      obj.success = message.success;
-    }
-    if (message.customerId !== '') {
-      obj.customerId = message.customerId;
-    }
-    if (message.token !== '') {
-      obj.token = message.token;
+    if (message.accessToken !== '') {
+      obj.accessToken = message.accessToken;
     }
     return obj;
   },
@@ -239,23 +205,21 @@ export const SignupResponse: MessageFns<SignupResponse> = {
     object: I,
   ): SignupResponse {
     const message = createBaseSignupResponse();
-    message.success = object.success ?? false;
-    message.customerId = object.customerId ?? '';
-    message.token = object.token ?? '';
+    message.accessToken = object.accessToken ?? '';
     return message;
   },
 };
 
-export interface CustomersAppService {
+export interface Customers {
   Signup(request: SignupDto): Promise<SignupResponse>;
 }
 
-export const CustomersAppServiceServiceName = 'customers.CustomersAppService';
-export class CustomersAppServiceClientImpl implements CustomersAppService {
+export const CustomersServiceName = 'customers.Customers';
+export class CustomersClientImpl implements Customers {
   private readonly rpc: Rpc;
   private readonly service: string;
   constructor(rpc: Rpc, opts?: { service?: string }) {
-    this.service = opts?.service || CustomersAppServiceServiceName;
+    this.service = opts?.service || CustomersServiceName;
     this.rpc = rpc;
     this.Signup = this.Signup.bind(this);
   }

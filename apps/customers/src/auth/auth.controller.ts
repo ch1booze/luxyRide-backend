@@ -7,8 +7,8 @@ import { SignupDto, SignupResponse } from 'libs/generated/customers';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @GrpcMethod('CustomerService', 'Signup')
+  @GrpcMethod('Customers', 'Signup')
   async signup(data: SignupDto): Promise<SignupResponse> {
-    return this.authService.signup(data);
+    return await this.authService.signup(data);
   }
 }
