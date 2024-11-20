@@ -1,7 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { GrpcMethod } from '@nestjs/microservices';
-import { SigninDto, SigninResponse } from './users.interface';
+import { SigninDto, SigninResponse } from 'libs/generated/admin';
 
 @Controller('users')
 export class UsersController {

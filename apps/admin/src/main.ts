@@ -7,7 +7,7 @@ import { ConfigService } from '@nestjs/config';
 async function bootstrap() {
   const appContext = await NestFactory.createApplicationContext(AdminModule);
   const configService = appContext.get(ConfigService);
-  const PORT = configService.get<number>('PORT');
+  const PORT = configService.get<number>('ADMIN_PORT');
 
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AdminModule,
@@ -16,7 +16,7 @@ async function bootstrap() {
       options: {
         package: 'admin',
         protoPath: join(__dirname, '../../../proto/admin.proto'),
-        url: `0.0.0.0:${PORT}`,
+        url: `localhost:${PORT}`,
       },
     },
   );

@@ -1,7 +1,7 @@
 import { Body, Controller, Inject, OnModuleInit, Post } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { ApiOperation } from '@nestjs/swagger';
-import { SigninDto, SigninResponse } from 'apps/admin/src/auth/auth.interface';
+import { SigninDto, SigninResponse } from 'libs/generated/admin';
 import { firstValueFrom, Observable } from 'rxjs';
 
 interface AdminApp {

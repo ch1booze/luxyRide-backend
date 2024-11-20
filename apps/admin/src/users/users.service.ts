@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { SigninDto, SigninResponse } from './users.interface';
 import { PrismaService } from '../prisma/prisma.service';
+import { SigninDto, SigninResponse } from 'libs/generated/admin';
 
 @Injectable()
 export class UsersService {

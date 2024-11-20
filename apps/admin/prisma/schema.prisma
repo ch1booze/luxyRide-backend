@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("ADMIN_DATABASE_URL")
 }
 
 model User {
@@ -44,5 +44,5 @@ model RolePermissions {
   role         Role       @relation(fields: [roleId], references: [id])
   permission   Permission @relation(fields: [permissionId], references: [id])
 
-  @@index([roleId, permissionId])
+  @@unique([roleId, permissionId])
 }

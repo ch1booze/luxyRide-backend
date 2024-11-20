@@ -4,6 +4,7 @@ import { GatewayModule } from './gateway.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(GatewayModule);
+  const configS;
 
   const config = new DocumentBuilder()
     .setTitle('LuxyRide API specification')
