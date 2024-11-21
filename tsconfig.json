@@ -17,13 +17,6 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "@app/proto": [
-        "libs/proto/src"
-      ],
-      "@app/proto/*": [
-        "libs/proto/src/*"
-      ]
-    }
+    "paths": {}
   }
 }

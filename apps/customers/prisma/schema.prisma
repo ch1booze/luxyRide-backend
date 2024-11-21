@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output = "./client"
+  output   = "./client"
 }
 
 datasource db {
@@ -16,6 +16,7 @@ model User {
   phoneNumber  String? @unique
   passwordHash String?
 
+  isLoggedIn   Boolean      @default(false)
   isVerified   Boolean      @default(false)
   signupMethod SignupMethod
 
@@ -28,5 +29,3 @@ enum SignupMethod {
   GOOGLE
   APPLE
 }
-
-

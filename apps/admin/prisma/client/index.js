@@ -155,7 +155,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/victor/Documents/Programming/Software_Engineering/luxyRide-be/luxyRide-backend/apps/admin/prisma/client",
+      "value": "/home/victor/Documents/Programming/Software_Engineering/luxy-ride-be/luxyRide-backend/apps/admin/prisma/client",
       "fromEnvVar": null
     },
     "config": {
@@ -169,11 +169,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/victor/Documents/Programming/Software_Engineering/luxyRide-be/luxyRide-backend/apps/admin/prisma/schema.prisma",
+    "sourceFilePath": "/home/victor/Documents/Programming/Software_Engineering/luxy-ride-be/luxyRide-backend/apps/admin/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": "../../../../.env"
   },
   "relativePath": "..",
   "clientVersion": "5.22.0",
