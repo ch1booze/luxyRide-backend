@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../prisma/customers"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("CUSTOMERS_DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+
+  email        String  @unique
+  phoneNumber  String? @unique
+  passwordHash String?
+
+  isVerified   Boolean      @default(false)
+  signupMethod SignupMethod
+
+  firstName String
+  lastName  String
+}
+
+enum SignupMethod {
+  EMAIL_PASSWORD
+  GOOGLE
+  APPLE
+}

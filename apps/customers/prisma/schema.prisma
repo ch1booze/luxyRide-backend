@@ -16,7 +16,6 @@ model User {
   phoneNumber  String? @unique
   passwordHash String?
 
-  isLoggedIn   Boolean      @default(false)
   isVerified   Boolean      @default(false)
   signupMethod SignupMethod
 
