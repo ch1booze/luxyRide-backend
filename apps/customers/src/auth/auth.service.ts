@@ -8,10 +8,18 @@ import { SignupMethod } from '../../../../prisma/customers';
 import * as argon2 from 'argon2';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { LoginDto, SignupDto, TokenResult } from './auth.dto';
+import {
+  LoginDto,
+  ProfileDto,
+  ResetPasswordDto,
+  SignupDto,
+  TokenResult,
+  VerifyEmailDto,
+} from './auth.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
+import { MessagingService, OtpService } from 'library/messaging';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +27,8 @@ export class AuthService {
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
     private jwtService: JwtService,
+    private messagingService: MessagingService,
+    private otpService: OtpService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
@@ -32,7 +42,6 @@ export class AuthService {
     return await this.jwtService.signAsync(dto, { secret, expiresIn: '7d' });
   }
 
-  
   async signup(dto: SignupDto): Promise<TokenResult> {
     const existingUser = await this.prismaService.user.findUnique({
       where: { email: dto.email },
@@ -51,7 +60,6 @@ export class AuthService {
         email: dto.email,
         passwordHash,
         signupMethod: SignupMethod.EMAIL_PASSWORD,
-  
       },
     });
 
@@ -101,7 +109,16 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  async refresh(user: any) {
+  async profile(user: any): Promise<ProfileDto> {
+    const foundUser = await this.prismaService.user.findUnique({
+      where: { id: user.id },
+    });
+
+    const { passwordHash, id, createdAt, ...profileDto } = foundUser;
+    return profileDto;
+  }
+
+  async refresh(user: any): Promise<TokenResult> {
     const foundUser = await this.prismaService.user.findUnique({
       where: { id: user.id },
     });
@@ -127,5 +144,65 @@ export class AuthService {
     });
 
     await this.cacheManager.del(foundUser.id);
+  }
+
+  async sendVerificationEmail(email: string) {
+    const foundUser = await this.prismaService.user.findUnique({
+      where: { email },
+    });
+
+    const name = foundUser.firstName + ' ' + foundUser.lastName;
+    const token = await this.otpService.generateOtp();
+
+    if (foundUser.signupMethod === SignupMethod.EMAIL_PASSWORD) {
+      await this.messagingService.sendEmail({
+        name,
+        contact: email,
+        subject: 'Verify Email',
+        message: `Token: ${token}`,
+      });
+    }
+  }
+
+  async verifyEmail(dto: VerifyEmailDto) {
+    if (await this.otpService.validateOtp(dto.token)) {
+      this.prismaService.user.update({
+        where: { email: dto.email },
+        data: { isEmailVerified: true },
+      });
+    }
+  }
+
+  async sendPasswordResetEmail(email: string) {
+    const foundUser = await this.prismaService.user.findUnique({
+      where: { email },
+    });
+
+    const name = foundUser.firstName + ' ' + foundUser.lastName;
+    const token = await this.otpService.generateOtp();
+
+    if (foundUser.signupMethod === SignupMethod.EMAIL_PASSWORD) {
+      await this.messagingService.sendEmail({
+        name,
+        contact: email,
+        subject: 'Reset Password',
+        message: `Token: ${token}`,
+      });
+    }
+  }
+
+  async resetPassword(dto: ResetPasswordDto) {
+    if (await this.otpService.validateOtp(dto.token)) {
+      const passwordHash = await argon2.hash(dto.password, {
+        secret: Buffer.from(
+          this.configService.get('CUSTOMERS_PASSWORD_SECRET'),
+        ),
+      });
+
+      await this.prismaService.user.update({
+        where: { email: dto.email },
+        data: { passwordHash },
+      });
+    }
   }
 }

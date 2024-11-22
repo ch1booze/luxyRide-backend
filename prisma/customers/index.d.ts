@@ -877,7 +877,8 @@ export namespace Prisma {
     email: string | null
     phoneNumber: string | null
     passwordHash: string | null
-    isVerified: boolean | null
+    isEmailVerified: boolean | null
+    isPhoneVerified: boolean | null
     signupMethod: $Enums.SignupMethod | null
     firstName: string | null
     lastName: string | null
@@ -889,7 +890,8 @@ export namespace Prisma {
     email: string | null
     phoneNumber: string | null
     passwordHash: string | null
-    isVerified: boolean | null
+    isEmailVerified: boolean | null
+    isPhoneVerified: boolean | null
     signupMethod: $Enums.SignupMethod | null
     firstName: string | null
     lastName: string | null
@@ -901,7 +903,8 @@ export namespace Prisma {
     email: number
     phoneNumber: number
     passwordHash: number
-    isVerified: number
+    isEmailVerified: number
+    isPhoneVerified: number
     signupMethod: number
     firstName: number
     lastName: number
@@ -915,7 +918,8 @@ export namespace Prisma {
     email?: true
     phoneNumber?: true
     passwordHash?: true
-    isVerified?: true
+    isEmailVerified?: true
+    isPhoneVerified?: true
     signupMethod?: true
     firstName?: true
     lastName?: true
@@ -927,7 +931,8 @@ export namespace Prisma {
     email?: true
     phoneNumber?: true
     passwordHash?: true
-    isVerified?: true
+    isEmailVerified?: true
+    isPhoneVerified?: true
     signupMethod?: true
     firstName?: true
     lastName?: true
@@ -939,7 +944,8 @@ export namespace Prisma {
     email?: true
     phoneNumber?: true
     passwordHash?: true
-    isVerified?: true
+    isEmailVerified?: true
+    isPhoneVerified?: true
     signupMethod?: true
     firstName?: true
     lastName?: true
@@ -1024,7 +1030,8 @@ export namespace Prisma {
     email: string
     phoneNumber: string | null
     passwordHash: string | null
-    isVerified: boolean
+    isEmailVerified: boolean
+    isPhoneVerified: boolean
     signupMethod: $Enums.SignupMethod
     firstName: string
     lastName: string
@@ -1053,7 +1060,8 @@ export namespace Prisma {
     email?: boolean
     phoneNumber?: boolean
     passwordHash?: boolean
-    isVerified?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
     signupMethod?: boolean
     firstName?: boolean
     lastName?: boolean
@@ -1065,7 +1073,8 @@ export namespace Prisma {
     email?: boolean
     phoneNumber?: boolean
     passwordHash?: boolean
-    isVerified?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
     signupMethod?: boolean
     firstName?: boolean
     lastName?: boolean
@@ -1077,7 +1086,8 @@ export namespace Prisma {
     email?: boolean
     phoneNumber?: boolean
     passwordHash?: boolean
-    isVerified?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
     signupMethod?: boolean
     firstName?: boolean
     lastName?: boolean
@@ -1093,7 +1103,8 @@ export namespace Prisma {
       email: string
       phoneNumber: string | null
       passwordHash: string | null
-      isVerified: boolean
+      isEmailVerified: boolean
+      isPhoneVerified: boolean
       signupMethod: $Enums.SignupMethod
       firstName: string
       lastName: string
@@ -1495,7 +1506,8 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly phoneNumber: FieldRef<"User", 'String'>
     readonly passwordHash: FieldRef<"User", 'String'>
-    readonly isVerified: FieldRef<"User", 'Boolean'>
+    readonly isEmailVerified: FieldRef<"User", 'Boolean'>
+    readonly isPhoneVerified: FieldRef<"User", 'Boolean'>
     readonly signupMethod: FieldRef<"User", 'SignupMethod'>
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
@@ -1807,7 +1819,8 @@ export namespace Prisma {
     email: 'email',
     phoneNumber: 'phoneNumber',
     passwordHash: 'passwordHash',
-    isVerified: 'isVerified',
+    isEmailVerified: 'isEmailVerified',
+    isPhoneVerified: 'isPhoneVerified',
     signupMethod: 'signupMethod',
     firstName: 'firstName',
     lastName: 'lastName'
@@ -1920,7 +1933,8 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     phoneNumber?: StringNullableFilter<"User"> | string | null
     passwordHash?: StringNullableFilter<"User"> | string | null
-    isVerified?: BoolFilter<"User"> | boolean
+    isEmailVerified?: BoolFilter<"User"> | boolean
+    isPhoneVerified?: BoolFilter<"User"> | boolean
     signupMethod?: EnumSignupMethodFilter<"User"> | $Enums.SignupMethod
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
@@ -1932,7 +1946,8 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrderInput | SortOrder
     passwordHash?: SortOrderInput | SortOrder
-    isVerified?: SortOrder
+    isEmailVerified?: SortOrder
+    isPhoneVerified?: SortOrder
     signupMethod?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
@@ -1947,7 +1962,8 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     createdAt?: DateTimeFilter<"User"> | Date | string
     passwordHash?: StringNullableFilter<"User"> | string | null
-    isVerified?: BoolFilter<"User"> | boolean
+    isEmailVerified?: BoolFilter<"User"> | boolean
+    isPhoneVerified?: BoolFilter<"User"> | boolean
     signupMethod?: EnumSignupMethodFilter<"User"> | $Enums.SignupMethod
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
@@ -1959,7 +1975,8 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrderInput | SortOrder
     passwordHash?: SortOrderInput | SortOrder
-    isVerified?: SortOrder
+    isEmailVerified?: SortOrder
+    isPhoneVerified?: SortOrder
     signupMethod?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
@@ -1977,7 +1994,8 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     passwordHash?: StringNullableWithAggregatesFilter<"User"> | string | null
-    isVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    isEmailVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    isPhoneVerified?: BoolWithAggregatesFilter<"User"> | boolean
     signupMethod?: EnumSignupMethodWithAggregatesFilter<"User"> | $Enums.SignupMethod
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
@@ -1989,7 +2007,8 @@ export namespace Prisma {
     email: string
     phoneNumber?: string | null
     passwordHash?: string | null
-    isVerified?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
     signupMethod: $Enums.SignupMethod
     firstName: string
     lastName: string
@@ -2001,7 +2020,8 @@ export namespace Prisma {
     email: string
     phoneNumber?: string | null
     passwordHash?: string | null
-    isVerified?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
     signupMethod: $Enums.SignupMethod
     firstName: string
     lastName: string
@@ -2013,7 +2033,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     signupMethod?: EnumSignupMethodFieldUpdateOperationsInput | $Enums.SignupMethod
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
@@ -2025,7 +2046,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     signupMethod?: EnumSignupMethodFieldUpdateOperationsInput | $Enums.SignupMethod
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
@@ -2037,7 +2059,8 @@ export namespace Prisma {
     email: string
     phoneNumber?: string | null
     passwordHash?: string | null
-    isVerified?: boolean
+    isEmailVerified?: boolean
+    isPhoneVerified?: boolean
     signupMethod: $Enums.SignupMethod
     firstName: string
     lastName: string
@@ -2049,7 +2072,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     signupMethod?: EnumSignupMethodFieldUpdateOperationsInput | $Enums.SignupMethod
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
@@ -2061,7 +2085,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    isPhoneVerified?: BoolFieldUpdateOperationsInput | boolean
     signupMethod?: EnumSignupMethodFieldUpdateOperationsInput | $Enums.SignupMethod
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
@@ -2143,7 +2168,8 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrder
     passwordHash?: SortOrder
-    isVerified?: SortOrder
+    isEmailVerified?: SortOrder
+    isPhoneVerified?: SortOrder
     signupMethod?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
@@ -2155,7 +2181,8 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrder
     passwordHash?: SortOrder
-    isVerified?: SortOrder
+    isEmailVerified?: SortOrder
+    isPhoneVerified?: SortOrder
     signupMethod?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
@@ -2167,7 +2194,8 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrder
     passwordHash?: SortOrder
-    isVerified?: SortOrder
+    isEmailVerified?: SortOrder
+    isPhoneVerified?: SortOrder
     signupMethod?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder

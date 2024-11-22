@@ -16,8 +16,9 @@ model User {
   phoneNumber  String? @unique
   passwordHash String?
 
-  isVerified   Boolean      @default(false)
-  signupMethod SignupMethod
+  isEmailVerified Boolean      @default(false)
+  isPhoneVerified Boolean      @default(false)
+  signupMethod    SignupMethod
 
   firstName String
   lastName  String

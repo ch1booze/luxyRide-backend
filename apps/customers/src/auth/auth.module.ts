@@ -4,9 +4,10 @@ import { AuthController } from './auth.controller';
 import { PrismaModule } from '../prisma/prisma.module';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
+import { MessagingModule } from 'library/messaging';
 
 @Module({
-  imports: [PrismaModule, JwtModule],
+  imports: [PrismaModule, JwtModule, MessagingModule],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
 })

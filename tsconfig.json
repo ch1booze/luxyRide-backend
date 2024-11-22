@@ -17,6 +17,13 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {}
+    "paths": {
+      "library/messaging": [
+        "libs/messaging/src"
+      ],
+      "library/messaging/*": [
+        "libs/messaging/src/*"
+      ]
+    }
   }
 }
