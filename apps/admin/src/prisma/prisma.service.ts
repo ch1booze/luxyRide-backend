@@ -1,6 +1,6 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { PrismaClient } from 'apps/admin/prisma/client';
+import { PrismaClient } from '../../../../prisma/admin';
 import * as argon2 from 'argon2';
 
 @Injectable()
@@ -16,15 +16,11 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   }
 
   private async createSuperUser(superUserRoleId: string) {
-    const superAdminUser = this.configService.get<string>('SUPER_ADMIN_USER');
-    const superAdminPassword = this.configService.get<string>(
-      'SUPER_ADMIN_PASSWORD',
-    );
+    const superAdminUser = this.configService.get('SUPER_ADMIN_USER');
+    const superAdminPassword = this.configService.get('SUPER_ADMIN_PASSWORD');
 
     const passwordHash = await argon2.hash(superAdminPassword, {
-      secret: Buffer.from(
-        this.configService.get<string>('ADMIN_PASSWORD_SECRET'),
-      ),
+      secret: Buffer.from(this.configService.get('ADMIN_PASSWORD_SECRET')),
     });
 
     await this.user.upsert({

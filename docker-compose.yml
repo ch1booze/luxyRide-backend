@@ -1,0 +1,65 @@
+version: '3'
+services:
+  admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: admin
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    depends_on:
+      - admin_db
+    networks:
+      - app_network
+
+  customers:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: customers
+    env_file:
+      - .env
+    ports:
+      - 3001:3001
+    depends_on:
+      - customers_db
+    networks:
+      - app_network
+
+  admin_db:
+    image: postgres:alpine
+    container_name: admin_db
+    environment:
+      - POSTGRES_USER=johndoe
+      - POSTGRES_PASSWORD=randompassword
+      - POSTGRES_DB=admin_db
+    ports:
+      - '5433:5432'
+    volumes:
+      - admin_db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  customers_db:
+    image: postgres:alpine
+    container_name: customers_db
+    environment:
+      - POSTGRES_USER=johndoe
+      - POSTGRES_PASSWORD=randompassword
+      - POSTGRES_DB=customers_db
+    ports:
+      - '5434:5432'
+    volumes:
+      - customers_db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+volumes:
+  admin_db_data:
+  customers_db_data:
+
+networks:
+  app_network:
+    driver: bridge

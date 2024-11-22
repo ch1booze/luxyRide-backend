@@ -1,0 +1,13 @@
+.*
+
+node_modules
+dist
+prisma
+docker-compose.yml
+
+*.log
+*.ts
+*.md
+.eslintrc
+.prettierrc
+

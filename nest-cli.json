@@ -1,24 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/luxy-ride-backend/src",
-  "compilerOptions": {
-    "deleteOutDir": true,
-    "webpack": true,
-    "tsConfigPath": "apps/luxy-ride-backend/tsconfig.app.json"
-  },
   "monorepo": true,
   "root": "apps/luxy-ride-backend",
   "projects": {
-    "luxy-ride-backend": {
-      "type": "application",
-      "root": "apps/luxy-ride-backend",
-      "entryFile": "main",
-      "sourceRoot": "apps/luxy-ride-backend/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/luxy-ride-backend/tsconfig.app.json"
-      }
-    },
     "admin": {
       "type": "application",
       "root": "apps/admin",

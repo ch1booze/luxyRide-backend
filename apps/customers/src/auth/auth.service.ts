@@ -19,12 +19,12 @@ export class AuthService {
   ) {}
 
   private async generateAccessToken(dto: any) {
-    const secret = this.configService.get<string>('CUSTOMERS_TOKEN_SECRET');
+    const secret = this.configService.get('CUSTOMERS_TOKEN_SECRET');
     return await this.jwtService.signAsync(dto, { secret, expiresIn: 30 });
   }
 
   private async generateRefreshToken(dto: any) {
-    const secret = this.configService.get<string>('CUSTOMERS_TOKEN_SECRET');
+    const secret = this.configService.get('CUSTOMERS_TOKEN_SECRET');
     return await this.jwtService.signAsync(dto, { secret, expiresIn: '7d' });
   }
 
