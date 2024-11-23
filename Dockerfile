@@ -2,11 +2,8 @@ FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY . .
 
 RUN npm install
 
-COPY . .
-
-CMD ["npm", "run", "start:apps"]
+CMD ["sh", "-c", "npm run migrate:dev && npm run start:$APP_NAME"]

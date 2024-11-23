@@ -4,13 +4,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: admin
     env_file:
       - .env
+    environment:
+      - APP_NAME=admin
     ports:
-      - 3000:3000
+      - ${ADMIN_PORT}:${ADMIN_PORT}
     depends_on:
-      - postgres
+      - db
     networks:
       - app_network
 
@@ -18,17 +19,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: customers
+    environment:
+      - APP_NAME=customers
     env_file:
       - .env
     ports:
-      - 3001:3001
+      - ${CUSTOMERS_PORT}:${CUSTOMERS_PORT}
     depends_on:
-      - postgres
+      - db
     networks:
       - app_network
 
-  postgres:
+  db:
     image: postgres:alpine
     container_name: postgres
     environment:
@@ -36,7 +38,7 @@ services:
       - POSTGRES_PASSWORD=randompassword
       - POSTGRES_DB=postgres
     ports:
-      - '5433:5432'
+      - 5433:5432
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
