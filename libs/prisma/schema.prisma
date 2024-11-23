@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt    DateTime  @default(now())
+  email        String    @unique
+  passwordHash String
+  roleId       String    @db.Uuid
+  role         Role      @relation(fields: [roleId], references: [id])
+  updatedAt    DateTime  @updatedAt
+  lastLogin    DateTime?
+}
+
+model Role {
+  id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String            @unique
+  description String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  permissions RolePermissions[]
+  admins       Admin[]
+}
+
+model Permission {
+  id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String            @unique
+  description String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  roles       RolePermissions[]
+}
+
+model RolePermissions {
+  roleId       String     @db.Uuid
+  permissionId String     @db.Uuid
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+
+  @@id(fields: [roleId, permissionId], name: "id")
+}
+
+model Customer {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+
+  email        String  @unique
+  phoneNumber  String? @unique
+  passwordHash String?
+
+  isEmailVerified Boolean      @default(false)
+  isPhoneVerified Boolean      @default(false)
+  signupMethod    SignupMethod
+
+  firstName String
+  lastName  String
+}
+
+enum SignupMethod {
+  EMAIL_PASSWORD
+  GOOGLE
+  APPLE
+}

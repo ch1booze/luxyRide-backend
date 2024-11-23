@@ -10,7 +10,7 @@ services:
     ports:
       - 3000:3000
     depends_on:
-      - admin_db
+      - postgres
     networks:
       - app_network
 
@@ -24,41 +24,26 @@ services:
     ports:
       - 3001:3001
     depends_on:
-      - customers_db
+      - postgres
     networks:
       - app_network
 
-  admin_db:
+  postgres:
     image: postgres:alpine
-    container_name: admin_db
+    container_name: postgres
     environment:
       - POSTGRES_USER=johndoe
       - POSTGRES_PASSWORD=randompassword
-      - POSTGRES_DB=admin_db
+      - POSTGRES_DB=postgres
     ports:
       - '5433:5432'
     volumes:
-      - admin_db_data:/var/lib/postgresql/data
-    networks:
-      - app_network
-
-  customers_db:
-    image: postgres:alpine
-    container_name: customers_db
-    environment:
-      - POSTGRES_USER=johndoe
-      - POSTGRES_PASSWORD=randompassword
-      - POSTGRES_DB=customers_db
-    ports:
-      - '5434:5432'
-    volumes:
-      - customers_db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     networks:
       - app_network
 
 volumes:
-  admin_db_data:
-  customers_db_data:
+  db_data:
 
 networks:
   app_network:

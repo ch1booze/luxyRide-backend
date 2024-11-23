@@ -23,6 +23,12 @@
       ],
       "library/messaging/*": [
         "libs/messaging/src/*"
+      ],
+      "library/database": [
+        "libs/database/src"
+      ],
+      "library/database/*": [
+        "libs/database/src/*"
       ]
     }
   }

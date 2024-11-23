@@ -1,24 +1,31 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { SignupMethod } from '@prisma/client';
 import { IsEmail, IsString, IsStrongPassword } from 'class-validator';
-import { SignupMethod } from 'prisma/customers';
 
 export class SignupDto {
+  @ApiProperty()
   @IsString()
   firstName: string;
 
+  @ApiProperty()
   @IsString()
   lastName: string;
 
+  @ApiProperty()
   @IsEmail()
   email: string;
 
+  @ApiProperty()
   @IsStrongPassword()
   password: string;
 }
 
 export class LoginDto {
+  @ApiProperty()
   @IsEmail()
   email: string;
 
+  @ApiProperty()
   @IsString()
   password: string;
 }
